@@ -13,9 +13,8 @@
           mat-button 
           [class.active]="activeSection === example.sectionId"
           (click)="jumpToSection(example.sectionId)"
-          routerLink="['docs']" 
+          [routerLink]="['/docs']" 
           fragment="{{example.sectionId}}"
-          routerLinkActive="active" 
           class="d-block w-100 fs-6"
         > {{example.name}} </button>
       }
