@@ -15,6 +15,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatToolbar } from '@angular/material/toolbar';
 import { NotFoundComponent } from './components/pages/not-found/not-found.component';
+import { PostsComponent } from './components/pages/posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NotFoundComponent } from './components/pages/not-found/not-found.compon
     CodeSnippetComponent,
     DocsComponent,
     NotFoundComponent,
+    PostsComponent,
   ],
   imports: [
     BrowserModule,
