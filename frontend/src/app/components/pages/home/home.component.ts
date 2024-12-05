@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { PrismService } from '../../../services/prism.service';
+import { PrismService } from '../../../core/services/prism.service';
 
 @Component({
   selector: 'app-home',

@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { PrismService } from '../../../services/prism.service';
+import { PrismService } from '../../../core/services/prism.service';
 @Component({
   selector: 'app-guide',
   templateUrl: './guide.component.html',

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PrismService } from '../../../services/prism.service';
+import { PrismService } from '../../../core/services/prism.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 interface HTTPRequestExample {
