@@ -1,44 +1,42 @@
+<mat-sidenav-container class=" container mt-4 p-4 pt-5 bg-transparent text-body">
+  <!-- *SideNav Content* -->
+  <mat-sidenav 
+    #sidenav
+    mode="side"
+    [(opened)]="hideSidenav"
+    class=" bg-transparent mt-4 m-0 pt-5 p-0 pe-3 border-3 border-end rounded-0 position-fixed w-auto d-flex flex-column text-center d-none d-lg-block"
+  >
 
-  <mat-sidenav-container class=" container mt-4 p-4 pt-5 bg-transparent">
-    <!-- *SideNav Content* -->
-    <mat-sidenav 
-      #sidenav
-      mode="side"
-      [(opened)]="hideSidenav"
-      class=" bg-transparent mt-4 m-0 pt-5 p-0 pe-3 border-3 border-end rounded-0 position-fixed container w-auto d-flex flex-column text-center d-none d-lg-block"
-    >
+    @for (example of requestExamples; track $index) {
+      <button 
+        mat-button 
+        [class.active]="activeSection === example.sectionId"
+        (click)="jumpToSection(example.sectionId)"
+        [routerLink]="['/docs']" 
+        fragment="{{example.sectionId}}"
+        class="d-block w-100 fs-6 m-1"
+      > {{example.name}} </button>
+    }
 
-      @for (example of requestExamples; track $index) {
-        <button 
-          mat-button 
-          [class.active]="activeSection === example.sectionId"
-          (click)="jumpToSection(example.sectionId)"
-          [routerLink]="['/docs']" 
-          fragment="{{example.sectionId}}"
-          class="d-block w-100 fs-6"
-        > {{example.name}} </button>
-      }
+  </mat-sidenav>
 
-    </mat-sidenav>
+  <!-- *Main Content* -->
+  <mat-sidenav-content class="px-3">
+    <header class="text-center ">
+      <h1 class="text-primary"> Docs </h1>
+      <p class="mb-0 fw-semibold">Below you'll find examples using Fetch API but you can JSONPlaceholder with any other language.</p>
+      <p class="mb-0 fw-semibold">You can copy paste the code in your browser console to quickly test JSONPlaceholder.</p>
+    </header>
 
-    <!-- *Main Content* -->
-    <mat-sidenav-content class="px-3">
-      <header class="text-center ">
-        <h1 class="text-primary"> Docs </h1>
-        <p class="mb-0 fw-semibold">Below you'll find examples using Fetch API but you can JSONPlaceholder with any other language.</p>
-        <p class="mb-0 fw-semibold">You can copy paste the code in your browser console to quickly test JSONPlaceholder.</p>
-      </header>
+  @for (example of codeExamples; track $index) {
+      <section class="container-fluid mt-5" [id]="example.id">
+        <app-code-snippet
+          title="{{example.title}}"
+          code="{{example.code}}"
+          output="{{example.output}}"
+        ></app-code-snippet>
+        </section>
+    }
+  </mat-sidenav-content>
 
-    @for (example of codeExamples; track $index) {
-        <section class="container-fluid mt-5" [id]="example.id">
-          <app-code-snippet
-            title="{{example.title}}"
-            code="{{example.code}}"
-            output="{{example.output}}"
-          ></app-code-snippet>
-         </section>
-      }
-    </mat-sidenav-content>
-
-  </mat-sidenav-container>
-  
+</mat-sidenav-container>

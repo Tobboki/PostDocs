@@ -1,4 +1,4 @@
-<section>
+<section class="container text-body">
   <h1 class="mb-3 fs-4 fw-semibold"> {{title}} </h1>
   <section>
     @if (code) {
@@ -6,7 +6,7 @@
     }
     @if (output) {
       <p class="fw-semibold my-4">
-        Output <i class="fa-solid fa-hand-point-down" style="color: #74C0FC;"></i>
+        Output <i class="fa-solid fa-hand-point-down" style="color: #74C0FC;"></i>`
       </p>
       <pre><code class="language-json"> {{output}} </code></pre>
     }
