@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { NavbarComponent } from './components/shared/components/navbar/navbar.component';
 import { GuideComponent } from './components/pages/guide/guide.component';
 import { CodeSnippetComponent } from './components/code-snippet/code-snippet.component';
 import { DocsComponent } from './components/pages/docs/docs.component';
@@ -16,6 +15,7 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { NotFoundComponent } from './components/pages/not-found/not-found.component';
 import { PostsComponent } from './components/pages/posts/posts.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +39,7 @@ import { HomeComponent } from './components/pages/home/home.component';
     MatButtonModule,
     MatButton,
     MatToolbar,
+    MatIconModule,
     MatIcon
   ],
   providers: [
