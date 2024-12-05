@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { GuideComponent } from './components/pages/guide/guide.component';
-import { CodeSnippetComponent } from './components/code-snippet/code-snippet.component';
+import { CodeSnippetComponent } from './shared/components/code-snippet/code-snippet.component';
 import { DocsComponent } from './components/pages/docs/docs.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent, MatSidenavModule} from '@angular/material/sidenav';
@@ -15,7 +15,7 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { NotFoundComponent } from './components/pages/not-found/not-found.component';
 import { PostsComponent } from './components/pages/posts/posts.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
