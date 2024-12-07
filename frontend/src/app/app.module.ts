@@ -16,6 +16,8 @@ import { NotFoundComponent } from './components/pages/not-found/not-found.compon
 import { PostsComponent } from './components/pages/posts/posts.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ThemeManagerService } from './core/services/theme-manager.service';
 
 @NgModule({
   declarations: [
@@ -40,10 +42,12 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
     MatButton,
     MatToolbar,
     MatIconModule,
-    MatIcon
+    MatIcon,
+    MatSlideToggleModule,
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    ThemeManagerService,
   ],
   bootstrap: [AppComponent]
 })

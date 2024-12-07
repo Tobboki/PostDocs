@@ -51,6 +51,19 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <button 
+              (click)="toggleTheme()"
+              class="btn fs-5"
+            >
+              @if (theme == 'light') {
+                <i class="fa-solid fa-sun" style="color: #fcd23c;"></i>
+              } @else {
+                <i class="fa-solid fa-moon" style="color: aliceblue;"></i>
+              }
+            </button>
+          </li>
+
         </ul>
 
       </div>

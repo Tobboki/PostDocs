@@ -4,17 +4,16 @@
     #sidenav
     mode="side"
     [(opened)]="hideSidenav"
-    class=" bg-transparent mt-4 m-0 pt-5 p-0 pe-3 border-3 border-end rounded-0 position-fixed w-auto d-flex flex-column text-center d-none d-lg-block"
+    class=" bg-transparent mt-4 m-0 pt-5 p-3 border-3 border-end rounded-0 position-fixed w-auto d-flex flex-column text-center d-none d-lg-block"
   >
 
     @for (example of requestExamples; track $index) {
       <button 
-        mat-button 
         [class.active]="activeSection === example.sectionId"
+        class="btn btn-primary my-2 d-block w-100 fw-semibold"
         (click)="jumpToSection(example.sectionId)"
         [routerLink]="['/docs']" 
         fragment="{{example.sectionId}}"
-        class="d-block w-100 fs-6 m-1"
       > {{example.name}} </button>
     }
 
