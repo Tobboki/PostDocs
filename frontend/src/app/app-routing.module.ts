@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/pages/home/home.component';
-import { GuideComponent } from './components/pages/guide/guide.component';
-import { DocsComponent } from './components/pages/docs/docs.component';
-import { NotFoundComponent } from './components/pages/not-found/not-found.component';
-import { PostsComponent } from './components/pages/posts/posts.component';
+import { HomeComponent } from './features/pages/home/home.component';
+import { GuideComponent } from './features/pages/guide/guide.component';
+import { DocsComponent } from './features/pages/docs/docs.component';
+import { NotFoundComponent } from './features/pages/not-found/not-found.component';
+import { PostsComponent } from './features/pages/posts/posts.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'PostDocs' },
