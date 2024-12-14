@@ -56,12 +56,14 @@ REST_FRAMEWORK = {
         'authentication.authentication.CookiesJwtAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ]
 }
+
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(weeks=1),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
     "UPDATE_LAST_LOGIN": False,
@@ -72,8 +74,8 @@ SIMPLE_JWT = {
     'AUTH_COOKIE_HTTP_ONLY': True,  # Make the cookie HTTP only
     'AUTH_COOKIE_PATH': '/',  # Root path for the cookie
     'AUTH_COOKIE_SAMESITE': 'Lax',  # Adjust according to your needs
-
 }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,9 +89,13 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
+
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",  # Allow Angular dev server
 ]
+
 
 ROOT_URLCONF = 'PostDocs.urls'
 

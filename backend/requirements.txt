@@ -5,11 +5,12 @@
 #
 # On a Macintosh this should be python3 and pip3
 #
-Django==5.3.0
+Django==5.1.4
 
 # Other requirments - frozen to a version to avoid any conflects
-djangorestframework==3.16.0
+djangorestframework==3.15.0
 django-cors-headers==4.6.0
+djangorestframework-simplejwt==5.3.1
 requests==2.31.0
 
 

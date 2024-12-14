@@ -1,20 +1,17 @@
-<header class="header fixed-top">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+<header class="header fixed-top shadow">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
       <a class="navbar-brand mb-0 fw-semibold text-primary py-2 px-3" [routerLink]="['home']">
-        <i class="fa-solid fa-signs-post"></i> 
-        PostDocs 
+        <i class="fa-solid fa-signs-post"></i>
+        PostDocs
       </a>
 
-      <button class="navbar-toggler border-0 " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
-
-        <div class="me-auto"></div>
-
-        <ul class="navbar-nav fw-semibold nav-list gap-lg-4 gap-md-2 align-items-center">
+        <ul class="navbar-nav fw-semibold nav-list gap-lg-3 gap-md-2 align-items-center w-100">
 
           <li class="nav-item">
             <a class="nav-link active-nav-link" aria-current="page" [routerLink]="['home']" routerLinkActive="active">
@@ -37,12 +34,14 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['posts']" routerLinkActive="active">
-              <i class="fa-solid fa-newspaper"></i>
-              Posts
-            </a>
-          </li>
+          @if (isLoggedIn) {
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['posts']" routerLinkActive="active">
+                <i class="fa-solid fa-newspaper"></i>
+                Posts
+              </a>
+            </li>
+          }
 
           <li class="nav-item">
             <a class="nav-link" href="https://github.com/Tobboki/PostDocs" target="_blank">
@@ -51,21 +50,40 @@
             </a>
           </li>
 
+          <div class="ms-auto"></div>
+
+          @if (isLoggedIn) {
+            <li class="nav-item">
+              <button 
+                class="btn btn-secondary fw-semibold"
+                (click)="logout()"
+              >
+                Log Out
+              </button>
+            </li>
+          } @else {
+            <li class="nav-item">
+              <button 
+                class="btn btn-primary fw-semibold"
+                (click)="navigateToLogin()"
+              >
+                Log In
+              </button>
+            </li>
+          }
+
           <li class="nav-item">
             <button 
               (click)="toggleTheme()"
-              class="btn fs-5"
+              class="btn btn-outline-secondary bg-transparent text-body"
             >
-              @if (theme == 'light') {
-                <i class="fa-solid fa-sun" style="color: #fcd23c;"></i>
-              } @else {
-                <i class="fa-solid fa-moon" style="color: aliceblue;"></i>
-              }
+              <i class="fa-solid" 
+                 [ngClass]="theme === 'light' ? 'fa-sun' : 'fa-moon'"
+                 [style.color]="theme === 'light' ? '#ffb30e' : 'aliceblue'">
+              </i>
             </button>
           </li>
-
         </ul>
-
       </div>
     </div>
   </nav>
