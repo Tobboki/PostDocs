@@ -49,7 +49,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 key='access_token',
                 value=str(access_token),
                 httponly=True,
-                secure=False,
+                secure=True,
                 samesite='None',
                 path='/',
                 max_age= 60 * 5 # 5 min
@@ -58,7 +58,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 key='refresh_token',
                 value=str(refresh_token),
                 httponly=True,
-                secure=False,
+                secure=True,
                 samesite='None',
                 path='/',
                 max_age= 60 * 60 * 24 * 7 # 1 week
@@ -94,7 +94,7 @@ class CustomRefreshTokenView(TokenObtainPairView):
                 key='access_token',
                 value=access_token,
                 httponly=True,
-                secure=False,
+                secure=True,
                 samesite='None',
                 path='/',
                 max_age= 60 * 60 * 24 * 7 # 1 week
