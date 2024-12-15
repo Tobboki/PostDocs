@@ -101,27 +101,22 @@ Below is an outline of the directory structure:
 
   ```bash
   PostDocs_project/
-├── backend/
+├── postDocs/
 │   ├── manage.py
-│   ├── backend/
+│   ├── postDocs/
 │   │   ├── settings.py
 │   │   ├── urls.py
 │   │   └── wsgi.py
-│   ├── users/                 
+│   ├── authentication/                  
 │   │   ├── migrations/
 │   │   ├── models.py
 │   │   ├── serializers.py
 │   │   ├── views.py
+│   │   ├── tests.py
+│   │   ├── authentication.py
 │   │   ├── urls.py
 │   │   └── admin.py
 │   ├── posts/                  
-│   │   ├── migrations/
-│   │   ├── models.py
-│   │   ├── serializers.py
-│   │   ├── views.py
-│   │   ├── urls.py
-│   │   └── admin.py
-│   ├── comments/                  
 │   │   ├── migrations/
 │   │   ├── models.py
 │   │   ├── serializers.py
@@ -134,7 +129,16 @@ Below is an outline of the directory structure:
 │   ├── public/            
 │   ├── src/
 │   │   ├── app/
-│   │   │   ├── components/
+│   │   │   ├── core/
+|   │   │   │   ├── services/
+|   │   │   │   └── interceptors/
+│   │   │   ├── features/
+|   │   │   │   ├── auth/
+|   │   │   │   └── pages/
+│   │   │   ├── shared/
+|   |   │   │   ├── components/
+|   |   |   |   ├── guards/
+|   |   │   │   └── validators/
 │   │   │   ├── app-routing.module.ts
 │   │   │   ├── app.component.css
 │   │   │   ├── app.component.html
@@ -142,6 +146,7 @@ Below is an outline of the directory structure:
 │   │   │   ├── app.component.ts
 │   │   │   └── app.module.ts
 │   │   ├── assets/            
+│   │   ├── environments/            
 │   │   ├── index.html          
 │   │   ├── main.ts            
 │   │   └── styles.css         
@@ -152,12 +157,15 @@ Below is an outline of the directory structure:
 ## Technologies Used
 
 - ### Backend Technologies
-
-  - **Django**: Python web framework
-  - **Django REST Framework (DRF)**: For building RESTful APIs
-  - **SQLite**: Default database for development (can be replaced with PostgreSQL or MySQL)
-  - **Django CORS Headers**: To handle Cross-Origin Resource Sharing (CORS) between Angular and Django
-  - **Postman**: For testing and verifying API endpoints
+    
+    - **Django**: Python web framework for developing scalable and robust web applications.
+    - *Django REST Framework (DRF)**: For building RESTful APIs.
+    - **SQLite**: Default database for development (can be replaced with PostgreSQL or MySQL).
+    - **Django REST Framework JWT**: Provides JSON Web Token (JWT) authentication for secure API access.
+    - **Django CORS Headers**: To handle Cross-Origin Resource Sharing (CORS) between Angular and Django.
+    - **Social Authentication**: Enables login using third-party providers like Google, Facebook, or GitHub (django-rest-framework-social-oauth2).
+    - **Environment Files**: Utilized to manage sensitive data and configuration settings with tools (dotenv).
+    - **Postman**: For testing and verifying API endpoints.
 
 - ### Frontend Technologies
 
@@ -167,6 +175,7 @@ Below is an outline of the directory structure:
   - **Node.js**: For package management with npm
   - **Prism.js**: To highlight JS code and API responses for testing and documentation
   - **Angular Material**: Using the built-in components for the API's Documentataion
+    **ScrollReveal.js**: A JavaScript library for adding scroll-based animations to enhance the front-end experience.
 
 ## Authors
 
