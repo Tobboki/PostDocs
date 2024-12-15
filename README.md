@@ -159,7 +159,7 @@ Below is an outline of the directory structure:
 - ### Backend Technologies
     
     - **Django**: Python web framework for developing scalable and robust web applications.
-    - *Django REST Framework (DRF)**: For building RESTful APIs.
+    - **Django REST Framework (DRF)**: For building RESTful APIs.
     - **SQLite**: Default database for development (can be replaced with PostgreSQL or MySQL).
     - **Django REST Framework JWT**: Provides JSON Web Token (JWT) authentication for secure API access.
     - **Django CORS Headers**: To handle Cross-Origin Resource Sharing (CORS) between Angular and Django.
