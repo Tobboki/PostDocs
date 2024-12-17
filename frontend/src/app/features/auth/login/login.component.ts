@@ -40,12 +40,8 @@ export class LoginComponent {
 
     this.authService.login(credentials).subscribe({
       // Success Response
-      next: (response) => {
-        console.log(response);
-      },
       complete: () => {
         const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-        console.log(returnUrl)
         this.router.navigateByUrl(returnUrl);
       },
       // Handle Errors

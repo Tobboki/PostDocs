@@ -148,7 +148,12 @@
               <span class="ms-auto"><a [routerLink]="['']" class="forgot-pass">Forgot Password?</a></span>
             </div> 
 
-            <input type="submit" [disabled]="loginForm.invalid" value="Log In" class="btn btn-block btn-primary w-100 fw-semibold">
+            <input 
+              class="btn btn-block btn-primary w-100 fw-semibold"
+              type="submit" 
+              [disabled]="loginForm.invalid" 
+              value="Log In" 
+            >
 
             <div class="sign-up mt-2">
               <p>

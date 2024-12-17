@@ -1,7 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ThemeManagerService } from '../../../core/services/theme-manager.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -9,19 +10,13 @@ import { ThemeManagerService } from '../../../core/services/theme-manager.servic
   styleUrls: ['./navbar.component.css'],
   standalone: false,
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   themeService: ThemeManagerService = inject(ThemeManagerService);
   theme: string = this.themeService.currentTheme;
-  isLoggedIn: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  authService: AuthService = inject(AuthService);
 
-  ngOnInit(): void {
-    // Subscribe to the `isLoggedIn$` observable
-    this.authService.isLoggedIn$.subscribe((authenticated) => {
-      this.isLoggedIn = authenticated;
-    });
-  }
+  constructor(private router: Router) {}
 
   logout() {
     this.authService.logout().subscribe(() => {

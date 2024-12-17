@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GuideComponent } from './features/pages/guide/guide.component';
 import { CodeSnippetComponent } from './shared/components/code-snippet/code-snippet.component';
@@ -18,8 +18,10 @@ import { HomeComponent } from './features/pages/home/home.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ThemeManagerService } from './core/services/theme-manager.service';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
-
+import { provideHttpClient } from '@angular/common/http';
+import { AsyncPipe } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,11 +47,17 @@ import { HttpClient, provideHttpClient } from '@angular/common/http';
     MatIconModule,
     MatIcon,
     MatSlideToggleModule,
+    AsyncPipe
   ],
   providers: [
     provideAnimationsAsync(),
     provideHttpClient(),
     ThemeManagerService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

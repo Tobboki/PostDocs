@@ -1,32 +1,37 @@
 <header class="header fixed-top shadow">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
+      <!-- Logo -->
       <a class="navbar-brand mb-0 fw-semibold text-primary py-2 px-3" [routerLink]="['home']">
         <i class="fa-solid fa-signs-post"></i>
         PostDocs
       </a>
-
+      
+      <!-- Menu Toggler -->
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
+      
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav fw-semibold nav-list gap-lg-3 gap-md-2 align-items-center w-100">
-
+          
+          <!-- Home Link -->
           <li class="nav-item">
             <a class="nav-link active-nav-link" aria-current="page" [routerLink]="['home']" routerLinkActive="active">
               <i class="fa-solid fa-house"></i>
               Home
             </a>
           </li>
-
+          
+          <!-- Guide Link -->
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['guide']" routerLinkActive="active">
               <i class="fa-solid fa-flag"></i>
               Guide
             </a>
           </li>
-
+          
+          <!-- Docs Link -->
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['docs']" routerLinkActive="active">
               <i class="fa-solid fa-book"></i>
@@ -34,7 +39,8 @@
             </a>
           </li>
 
-          @if (isLoggedIn) {
+          <!-- Posts Link -->
+          @if (authService.isLoggedIn) {
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['posts']" routerLinkActive="active">
                 <i class="fa-solid fa-newspaper"></i>
@@ -42,36 +48,40 @@
               </a>
             </li>
           }
-
+          
+          <!-- GitHub Link -->
           <li class="nav-item">
             <a class="nav-link" href="https://github.com/Tobboki/PostDocs" target="_blank">
               <i class="fa-brands fa-github"></i>
               Github
             </a>
           </li>
-
+          
+          <!-- Separator-->
           <div class="ms-auto"></div>
-
-          @if (isLoggedIn) {
+          
+          <!-- Log in/out buttons -->
+          @if (authService.isLoggedIn) {
             <li class="nav-item">
               <button 
-                class="btn btn-secondary fw-semibold"
-                (click)="logout()"
+              class="btn btn-secondary fw-semibold"
+              (click)="logout()"
               >
-                Log Out
-              </button>
-            </li>
+              Logout
+            </button>
+          </li>
           } @else {
             <li class="nav-item">
               <button 
-                class="btn btn-primary fw-semibold"
-                (click)="navigateToLogin()"
+              class="btn btn-primary fw-semibold"
+              (click)="navigateToLogin()"
               >
-                Log In
-              </button>
-            </li>
-          }
-
+              Log In
+            </button>
+          </li>
+        }
+        
+          <!-- Theme toggle button -->
           <li class="nav-item">
             <button 
               (click)="toggleTheme()"
@@ -83,6 +93,7 @@
               </i>
             </button>
           </li>
+
         </ul>
       </div>
     </div>

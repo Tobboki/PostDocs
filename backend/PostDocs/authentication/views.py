@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from .serializers import UserRegisterSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 # Custom Token View for JWT Authentication
 class CustomTokenObtainPairView(TokenObtainPairView):
@@ -34,10 +34,6 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             response = super().post(request, *args, **kwargs)
             tokens = response.data
 
-            # Check if tokens exist
-            if not tokens.get('access') or not tokens.get('refresh'):
-                return Response({'success': False, 'error': 'Failed to generate tokens'}, status=500)
-
             # Extract tokens
             access_token = tokens['access']
             refresh_token = tokens['refresh']
@@ -51,8 +47,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 httponly=True,
                 secure=True,
                 samesite='None',
-                path='/',
-                max_age= 60 * 5 # 5 min
+                path='/'
             )
             res.set_cookie(
                 key='refresh_token',
@@ -60,8 +55,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 httponly=True,
                 secure=True,
                 samesite='None',
-                path='/',
-                max_age= 60 * 60 * 24 * 7 # 1 week
+                path='/'
             )
 
             return res
@@ -70,8 +64,8 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
 
 # Custom Refresh Token View
-class CustomRefreshTokenView(TokenObtainPairView):
-    def post(self,request,*args,**kwargs):
+class CustomRefreshTokenView(TokenRefreshView):
+    def post(self, request, *args, **kwargs):
         try:
             # Get the refresh token from cookies
             refresh_token = request.COOKIES.get('refresh_token')
@@ -79,41 +73,32 @@ class CustomRefreshTokenView(TokenObtainPairView):
                 return Response({'refreshed': False, 'error': 'Refresh token is missing'}, status=401)
             request.data['refresh'] = refresh_token
 
-            if not tokens.get('access'):
-                return Response({'refreshed': False, 'error': 'Failed to refresh access token'}, status=500)
-
             # Generate a new access token
-            response = super().post(request,*args,**kwargs)
-            tokens = response.data
+            response = super().post(request, *args, **kwargs)
+            tokens = response.data  # Now, tokens are assigned here
+
+            # Extract the access token
             access_token = tokens['access']
 
-            # Set token in cookies
+            # Set the new access token in cookies
             res = Response()
-            res.data = {'refreshed':True}
+            res.data = {'refreshed': True}
             res.set_cookie(
                 key='access_token',
                 value=access_token,
                 httponly=True,
                 secure=True,
                 samesite='None',
-                path='/',
-                max_age= 60 * 60 * 24 * 7 # 1 week
+                path='/'
             )
 
             return res
         
         # Handling Errors
-        except ValidationError as err:
-            # Handles invalid credentials or other validation issues
-            return Response({'success': False, 'error': 'Invalid username or password'}, status=401)
         except TokenError as err:
             # Handles token-related errors
             return Response({'success': False, 'error': f'Token error: {str(err)}'}, status=400)
-        except Exception as err:
-            # Handles unexpected errors
-            return Response({'success': False, 'error': f'Unexpected error: {str(err)}'}, status=500)
-        except Exception as err:
-            return Response({'refreshed': False, 'error': f'Unexpected error: {str(err)}'}, status=500)
+
 
 # Logout API: Clears authentication cookies
 @api_view(['POST'])
@@ -139,14 +124,13 @@ def logout(request):
     except Exception as err:
         return Response({'success': False, 'error': f'Unexpected error: {str(err)}'}, status=500)
 
+
 # Check if a user is authenticated
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def is_authenticated(request):
-    try:
-        return Response({'authenticated': True})
-    except Exception as err:
-        return Response({'authenticated': False, 'error': f'Unexpected error: {str(err)}'}, status=500)
+    return Response({'authenticated': True})
+
 
 # User Registration API
 @api_view(['POST'])

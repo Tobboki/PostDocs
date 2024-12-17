@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environments';
 
@@ -8,10 +8,14 @@ import { environment } from '../../../environments/environments';
   providedIn: 'root',
 })
 export class AuthService {
-  private isLoggedInSubject = new BehaviorSubject<boolean>(false); // Tracks login state
-  isLoggedIn$ = this.isLoggedInSubject.asObservable(); // Observable to expose the state
+  private isLoggedInSignal = signal<boolean>(false);
 
   constructor(private http: HttpClient) {}
+
+  // Getter to expose the signal
+  get isLoggedIn() {
+    return this.isLoggedInSignal();
+  }
 
   // Login user
   login(credentials: { username: string; password: string }): Observable<boolean> {
@@ -21,30 +25,55 @@ export class AuthService {
       { withCredentials: true }
     ).pipe(
       map(response => {
-        this.isLoggedInSubject.next(response.success);
+        this.isLoggedInSignal.set(response.success);
         return response.success;
-      }),
-      catchError(error => {
-        console.error('Login failed', error);
-        return throwError(() => error);
       })
     );
   }
 
   // Logout user
   logout(): Observable<boolean> {
+    return this.http
+      .post<any>(
+        `${environment.authApiUrl}${environment.authEndpoints.logout}`,
+        {},
+        { withCredentials: true }
+      )
+      .pipe(
+        map((response) => {
+          this.isLoggedInSignal.set(false); // Reset the signal
+          return response.success;
+        })
+      );
+  }
+
+  // Initialize the value of isLoggedInSignal
+  initializeAuthState(): void {
+    this.refreshToken().subscribe({
+      next: () => {
+        // If the refresh token is valid, mark the user as logged in
+        this.isLoggedInSignal.set(true);
+      },
+      error: () => {
+        // If refreshing fails, ensure the user is logged out
+        this.isLoggedInSignal.set(false);
+      },
+    });
+  }
+  
+  // Refresh token
+  refreshToken(): Observable<boolean> {
     return this.http.post<any>(
-      `${environment.authApiUrl}${environment.authEndpoints.logout}`,
+      `${environment.authApiUrl}${environment.authEndpoints.refreshToken}`,
       {},
       { withCredentials: true }
     ).pipe(
       map(response => {
-        this.isLoggedInSubject.next(false); // Reset login state on logout
-        return response.success;
-      }),
-      catchError(error => {
-        console.error('Logout failed', error);
-        return throwError(() => error);
+        if (response.refreshed) {
+          this.isLoggedInSignal.set(true); // Update login state
+          return true;
+        }
+        return false;
       })
     );
   }
@@ -57,12 +86,8 @@ export class AuthService {
       { withCredentials: true }
     ).pipe(
       map(response => {
-        this.isLoggedInSubject.next(response.authenticated); // Update state based on response
+        this.isLoggedInSignal.set(response.authenticated); // Update state based on response
         return response.authenticated;
-      }),
-      catchError(error => {
-        console.error('Authentication check failed', error);
-        return throwError(() => error);
       })
     );
   }

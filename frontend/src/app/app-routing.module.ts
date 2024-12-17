@@ -5,7 +5,7 @@ import { GuideComponent } from './features/pages/guide/guide.component';
 import { DocsComponent } from './features/pages/docs/docs.component';
 import { NotFoundComponent } from './features/pages/not-found/not-found.component';
 import { PostsComponent } from './features/pages/posts/posts.component';
-import { loginGuard, PreventLoadGuard } from './shared/guards/auth.guard';
+import { loginGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'PostDocs' },
