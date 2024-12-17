@@ -1,0 +1,283 @@
+<section class="container mt-5 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="row border rounded-4 p-3">
+    <div class="col-lg-6 py-5 bg-body-secondary rounded-4 text-center">
+      <img src="../../../../assets/illustrations/register_light.png" alt="Image" class="img-fluid">
+    </div>
+    <div class="col-lg-6 py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="mb-4 text-center text-lg-start mb-lg-0 mb-sm-5">
+            <h3>Register</h3>
+            <p class="mb-2 text-body-50 fw-semibold">Manage your posts effortlessly with our posts dashboard with ease and efficiency.</p>
+          </div>
+
+          <form class="form" [formGroup]="registerForm" (ngSubmit)="register()">
+            <!-- Username Input -->
+            <input 
+              type="text" 
+              class="form-control bg-body-secondary py-2 rounded-bottom-0" 
+              [class.border-danger]="
+                registerForm.get('username')?.invalid 
+                && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)
+              "
+              id="username" 
+              placeholder="Username" 
+              formControlName="username"
+              required 
+            >
+
+            <!-- Username error massages -->
+            @if (registerForm.get('username')?.touched && registerForm.get('username')?.invalid) {
+
+              <!-- Username required -->
+              @if (registerForm.get('username')?.hasError('required')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Username is required.</small>
+                </div>
+              }
+
+              <!-- Username length -->
+              @if (registerForm.get('username')?.hasError('minlength') || registerForm.get('username')?.hasError('maxlength')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Username must be between 3 and 18 characters.</small>
+                </div>
+              }
+
+              <!-- Username is taken -->
+              @if (registerForm.get('username')?.hasError('usernameTaken')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Username is already taken.</small>
+                </div>
+              }
+
+              <!-- Username contains whitespace -->
+              @if (registerForm.get('username')?.hasError('whitespace')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">whitespace is not allowed in username.</small>
+                </div>
+              }
+
+              <!-- Username contains invalid special chars -->
+              @if (registerForm.get('username')?.hasError('invalidSpecialChar')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Can't use special characters other than '_'.</small>
+                </div>
+              }
+            }
+
+            <!-- Email Input -->
+            <div>
+              <input 
+            class="form-control bg-body-secondary py-2 rounded-0" 
+            [class.border-danger]="
+              registerForm.get('email')?.invalid 
+              && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)
+            "
+            type="email" 
+            formControlName="email"
+            placeholder="Email"
+            >
+             <!-- Email error massages -->
+             @if (registerForm.get('email')?.touched && registerForm.get('email')?.invalid) {
+
+              <!-- Email required -->
+              @if (registerForm.get('email')?.hasError('required')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Email is required.</small>
+                </div>
+              }
+
+              <!-- Email Doesn't exist -->
+              @if (registerForm.get('email')?.hasError('email')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Email is incorrect.</small>
+                </div>
+              }
+
+              <!-- Email Doesn't exist -->
+              @if (registerForm.get('email')?.hasError('invalidEmail')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Email is incorrect.</small>
+                </div>
+              }
+
+            }
+            </div>
+
+            <!-- Password Input -->
+            <div>
+              <div 
+              class="input-group border bg-body-secondary rounded-0"
+              [class.border-danger]="
+                registerForm.get('password')?.invalid 
+                && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)
+              "
+              >
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  class="form-control bg-body-secondary py-2  m-0 rounded-0"
+                  formControlName="password"
+                  placeholder="Password"
+                />
+                <span
+                  class="input-group-text bg-body-secondary rounded-top-0"
+                  style="cursor: pointer;"
+                  (click)="toggleShowPassword()"
+                >
+                @if (showPassword) {
+                  <i class="fa-solid fa-eye-slash"></i>
+                } @else {
+                  <i class="fa-solid fa-eye"></i>
+                }
+                </span>
+              </div>
+
+              <!-- Password error massages -->
+              @if (registerForm.get('password')?.touched && registerForm.get('password')?.invalid) {
+
+                <!-- Password required -->
+                @if (registerForm.get('password')?.hasError('required')) {
+                  <div class="d-block">
+                    <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                    <small class="text-danger">Password is required.</small>
+                  </div>
+                }
+
+                <!-- Password required -->
+                @if (registerForm.get('password')?.hasError('minlength')) {
+                  <div class="d-block"> 
+                    <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                    <small class="text-danger">Password must be at least 8 characters.</small>
+                  </div>
+                }
+
+                <!-- Password contains whitespace -->
+                @if (registerForm.get('password')?.hasError('whitespace')) {
+                  <div class="d-block">
+                    <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                    <small class="text-danger">whitespace is not allowed in password.</small>
+                  </div>
+                }
+
+                <!-- Password contains invalid special chars -->
+                @if (registerForm.get('password')?.hasError('invalidSpecialChar')) {
+                  <div class="d-block">
+                    <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                    <small class="text-danger">Can't use special characters other than '_'.</small>
+                  </div>
+                }
+              }
+            </div>
+
+            <!-- Confirm Password Input -->
+            <div class="mb-5">
+              <div 
+              class="input-group border bg-body-secondary rounded rounded-top-0"
+              [class.border-danger]="
+                registerForm.get('confirmPassword')?.invalid 
+                && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)
+              "
+              >
+                <input
+                  [type]="showConfirmPassword ? 'text' : 'password'"
+                  class="form-control bg-body-secondary py-2 rounded-top-0"
+                  formControlName="confirmPassword"
+                  placeholder="Confirm Password"
+                />
+                <span
+                  class="input-group-text bg-body-secondary rounded-top-0"
+                  style="cursor: pointer;"
+                  (click)="toggleShowConfirmPassword()"
+                >
+                @if (showConfirmPassword) {
+                  <i class="fa-solid fa-eye-slash"></i>
+                } @else {
+                  <i class="fa-solid fa-eye"></i>
+                }
+                </span>
+              </div>
+
+              <!-- Confirm Password error massages -->
+              @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid) {
+
+                <!-- confirmPassword required -->
+                @if (registerForm.get('confirmPassword')?.hasError('required')) {
+                  <div class="d-block">
+                    <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                    <small class="text-danger">Confirm Password is required.</small>
+                  </div>
+                }
+
+                <!-- confirmPassword required -->
+                @if (registerForm.get('confirmPassword')?.hasError('minlength')) {
+                  <div class="d-block"> 
+                    <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                    <small class="text-danger">Confirm Password must be at least 8 characters.</small>
+                  </div>
+                }
+
+                <!-- confirmPassword contains whitespace -->
+                @if (registerForm.get('confirmPassword')?.hasError('whitespace')) {
+                  <div class="d-block">
+                    <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                    <small class="text-danger">whitespace is not allowed in Confirm Password.</small>
+                  </div>
+                }
+
+                <!-- confirmPassword contains invalid special chars -->
+                @if (registerForm.get('confirmPassword')?.hasError('invalidSpecialChar')) {
+                  <div class="d-block">
+                    <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                    <small class="text-danger">Can't use special characters other than '_'.</small>
+                  </div>
+                }
+              }
+
+              <!-- Error for password mismatch -->
+              @if (registerForm.hasError('passwordMismatch') && registerForm.touched) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Passwords doesn't match.</small>
+                </div>
+              }
+            </div>
+
+            <input 
+              class="btn btn-block btn-primary w-100 fw-semibold"
+              type="submit" 
+              [disabled]="registerForm.invalid" 
+              value="Register" 
+            >
+
+            <div class="sign-up mt-2">
+              <p>
+                have an account? <a [routerLink]="['']">Log In</a>
+              </p>
+            </div>
+
+            <div class="social-login text-center">
+              <span class="d-block text-left mt-4 mb-1 text-muted">&mdash; or login with &mdash;</span>
+              <div class="fs-2">
+                <a [routerLink]="['']" class="pe-2">
+                  <i class="fa-brands fa-google"></i>
+                </a>
+                <a [routerLink]="['']" class="pe-2">
+                  <i class="fa-brands fa-facebook"></i>
+                </a>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

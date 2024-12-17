@@ -2,7 +2,6 @@ import { Component, inject, OnInit, Signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ThemeManagerService } from '../../../core/services/theme-manager.service';
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -28,6 +27,12 @@ export class NavbarComponent {
     // Pass the current URL as the returnUrl query parameter
     const currentUrl = this.router.url;
     this.router.navigate(['/auth/login'], { queryParams: { returnUrl: currentUrl } });
+  }
+
+  navigateToRegister() {
+    // Pass the current URL as the returnUrl query parameter
+    const currentUrl = this.router.url;
+    this.router.navigate(['/auth/register'], { queryParams: { returnUrl: currentUrl } });
   }
 
   toggleTheme() {

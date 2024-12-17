@@ -17,6 +17,25 @@ export class AuthService {
     return this.isLoggedInSignal();
   }
 
+  // Register a new user
+  register(credentials: { username: string; email: string; password: string }): Observable<boolean> {
+    return this.http.post<any>(
+      `${environment.authApiUrl}${environment.authEndpoints.register}`,
+      credentials
+    ).pipe(
+      map((response) => {
+        if (response.success) {
+          return true; // Registration successful
+        }
+        throw new Error(response.error || 'Registration failed');
+      }),
+      catchError((error) => {
+        console.error('Registration error:', error);
+        throw error; // Pass the error to the component
+      })
+    );
+  }
+
   // Login user
   login(credentials: { username: string; password: string }): Observable<boolean> {
     return this.http.post<any>(

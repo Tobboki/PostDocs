@@ -15,6 +15,18 @@ export const loginGuard: CanActivateFn = (route, state) => {
   }
 };
 
+export const authGuard: CanActivateFn = (route, state) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (authService.isLoggedIn) {
+    // Redirect logged-in users to the home/dashboard page
+    router.navigate(['/']);
+    return false; // Block access
+  }
+  return true; // Allow access if the user is not logged in
+};
+
 // PreventLoadGuard: Prevents loading if the user is not authenticated
 // export const PreventLoadGuard: CanMatchFn = (route, segments) => {
 //   const authService = inject(AuthService);

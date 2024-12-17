@@ -146,7 +146,7 @@ def register(request):
         
     errors = serializer.errors
     if 'username' in errors:
-        return Response({'success': False, 'error': 'Username is already taken'}, status=400)
+        return Response({'success': False, 'error': 'Username taken'}, status=400)
     if 'password' in errors:
         return Response({'success': False, 'error': 'Password validation failed'}, status=400)
 
