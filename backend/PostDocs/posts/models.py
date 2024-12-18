@@ -22,3 +22,10 @@ class Comment(models.Model):
 
     def __str__(self):
        return f"Comment by {self.user.firstname} on {self.post.title}"
+    
+class photo(models.Model):
+    title=models.CharField(max_length=300)
+    url=models.URLField()
+    thumbnaiurl=models.URLField()
+    def __str__(self):
+       return f"photo"

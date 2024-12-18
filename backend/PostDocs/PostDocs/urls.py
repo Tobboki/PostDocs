@@ -26,7 +26,8 @@ urlpatterns = [
     
     path('users/<int:id>',views.user_detail),
     path('users/',views.User_list),
-
+    path('photos/<int:id>',views.photo_detail),
+    path('photos/',views.photo_list),
     path('comments/<int:id>',views.comment_detail),
     path('comments/',views.comment_list),
     path('api/',include('authentication.urls'))

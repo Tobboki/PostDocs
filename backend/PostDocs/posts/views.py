@@ -1,6 +1,6 @@
 from django.http import JsonResponse
-from .models import Post, User, Comment
-from .serializers import PostSerializer, UserSerializer, CommentSerializer
+from .models import Post, User, Comment,photo
+from .serializers import PostSerializer, UserSerializer, CommentSerializer,PhotoSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -119,3 +119,61 @@ def comment_detail(request,id):
     if request.method == 'DELETE':
         requested_comment.delete()
         return Response({"detail": "User Deleted Successfully"}, status=status.HTTP_204_NO_CONTENT)
+def userfa():
+
+        url='https://jsonplaceholder.typicode.com/photos'
+        response=requests.get(url)
+    
+        
+        photos=response.json()
+        photos_to_save = photos[:500]
+
+        for i in photos_to_save:
+                
+        
+                photos, created = photo.objects.get_or_create(
+                    title=i['title'],
+                    url	=i['url'],
+                    
+                    thumbnaiurl=i['thumbnailUrl'])
+
+
+@api_view(['GET','POST'])
+def photo_list(request):
+    if request.method=='GET':
+        userfa()
+        photos=photo.objects.all()
+        serializer=PhotoSerializer(photos,many=True)
+        return JsonResponse(serializer.data,safe=False)
+    
+    if request.method=='POST':
+        serializer=PhotoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+@api_view(['GET','PUT','DELETE'])
+def photo_detail(request,id):
+    
+    try:
+        request_photo=photo.objects.get(pk=id)
+    
+    except:
+        return Response({"error": "photo not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method=='GET':
+        serializer=PhotoSerializer(request_photo)
+        return Response(serializer.data)
+    
+    if request.method=='PUT':
+        serializer=PhotoSerializer(request_photo,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    if request.method == 'DELETE':
+        request_photo.delete()  
+        return Response({"detail": "Photo Deleted Successfully"}, status=status.HTTP_204_NO_CONTENT)  
