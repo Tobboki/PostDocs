@@ -119,29 +119,11 @@ def comment_detail(request,id):
     if request.method == 'DELETE':
         requested_comment.delete()
         return Response({"detail": "User Deleted Successfully"}, status=status.HTTP_204_NO_CONTENT)
-def userfa():
-
-        url='https://jsonplaceholder.typicode.com/photos'
-        response=requests.get(url)
-    
-        
-        photos=response.json()
-        photos_to_save = photos[:500]
-
-        for i in photos_to_save:
-                
-        
-                photos, created = photo.objects.get_or_create(
-                    title=i['title'],
-                    url	=i['url'],
-                    
-                    thumbnaiurl=i['thumbnailUrl'])
-
 
 @api_view(['GET','POST'])
 def photo_list(request):
     if request.method=='GET':
-        userfa()
+        
         photos=photo.objects.all()
         serializer=PhotoSerializer(photos,many=True)
         return JsonResponse(serializer.data,safe=False)
