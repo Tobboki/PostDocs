@@ -9,7 +9,11 @@ import requests
 @api_view(['GET','POST'])
 def post_list(request):
     if request.method == 'GET':
-        posts = Post.objects.all()
+        user_id = request.query_params.get('user_id')
+        if user_id:
+            posts = Post.objects.filter(user__id=user_id) 
+        else:
+            posts = Post.objects.all()
         serializer = PostSerializer(posts, many=True) 
         return JsonResponse(serializer.data, safe=False)
     
@@ -87,7 +91,11 @@ def user_detail(request,id):
 @api_view(['GET', 'POST'])
 def comment_list(request):
     if request.method == 'GET':
-        comments = Comment.objects.all()
+        user_id = request.query_params.get('user_id')
+        if user_id:
+            comments = Comment.objects.filter(user__id=user_id) 
+        else:
+            comments = Comment.objects.all()
         serializer = CommentSerializer(comments,many=True) 
         return JsonResponse(serializer.data, safe=False)
     
