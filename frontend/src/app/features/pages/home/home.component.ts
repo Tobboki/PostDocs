@@ -9,7 +9,7 @@ import { PrismService } from '../../../core/services/prism.service';
 })
 export class HomeComponent implements AfterViewInit {
   exampleCode: string = `
-fetch('https://localhost:8000/posts/1')
+fetch('https://127.0.0.1:8000/posts/1')
   .then(response => response.json())
   .then(json => console.log(json))
   `;
@@ -17,8 +17,8 @@ fetch('https://localhost:8000/posts/1')
 {
   id: 1,
   title: '...',
-  body: '...',
-  userId: 1
+  content: '...',
+  user: 1
 }
   `;
   @ViewChild('outputCode', { static: false }) outputCodeElement?: ElementRef<HTMLElement>;

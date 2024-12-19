@@ -42,9 +42,9 @@
 
     </div>
   </section>
-  <!-- Hero End -->
+  <!-- *Hero End* -->
 
-  <!-- Example Section -->
+  <!-- *Example Section* -->
   <section class="container">
     <app-code-snippet
       title="Example Code"
@@ -52,7 +52,7 @@
       output="{{exampleOutput}}"
     ></app-code-snippet>
   </section>
-  <!-- Example End -->
+  <!-- *Example End* -->
 
   <!-- *Resources Section* -->
   <section class="container">
@@ -61,13 +61,16 @@
       <p>PostDocs comes with a set of 3 common resources:</p>
       <ul class="list-group mb-3">
         <li class="list-group-item">
-          <a class="pe-5" href="" target="_blank">/posts</a>  200 posts
+          <a class="pe-5" href="http://127.0.0.1:8000/posts" target="_blank">/posts</a>  200 posts
         </li>
         <li class="list-group-item">
-          <a class="pe-2" href="" target="_blank">/comments</a>  100 comments
+          <a class="pe-5" href="http://127.0.0.1:8000/users" target="_blank">/users</a>  15 users
         </li>
         <li class="list-group-item">
-          <a class="pe-5" href="" target="_blank">/users</a>  15 users
+          <a class="pe-2" href="http://127.0.0.1:8000/comments" target="_blank">/comments</a>  100 comments
+        </li>
+        <li class="list-group-item">
+          <a class="pe-4 me-2" href="http://127.0.0.1:8000/photos" target="_blank">/photos</a>  500 photos
         </li>
       </ul>
       <div class="bg-warning-subtle px-2">
@@ -79,7 +82,7 @@
       </div>
     </div>
   </section>
-  <!-- Resources End -->
+  <!-- *Resources End* -->
 
   <!-- *Routes Section* -->
   <section class="container">
@@ -89,62 +92,39 @@
       <ul class="list-group mb-3">
         <!-- GET Routes -->
         <li class="list-group-item">
-          GET <a class="px-5" href="" target="_blank">/posts</a>
+          GET <a class="px-5 link-opacity-50-hover" href="http://127.0.0.1:8000/posts" target="_blank">/posts</a>
         </li>
         <li class="list-group-item">
-          GET <a class="px-5" href="" target="_blank">/posts/1</a>
+          GET <a class="px-5 link-opacity-50-hover" href="http://127.0.0.1:8000/posts/1" target="_blank">/posts/1</a>
         </li>
         <li class="list-group-item">
-          GET <a class="px-5" href="" target="_blank">/posts/1/comments</a>
+          GET <a class="px-5 link-opacity-50-hover" href="http://127.0.0.1:8000/posts?userId=1" target="_blank">/posts?userId=1</a>
         </li>
         <li class="list-group-item">
-          GET <a class="px-5" href="" target="_blank">/posts?userId=1</a>
-        </li>
-        <li class="list-group-item">
-          GET <a class="px-5" href="" target="_blank">/comments?postId=1</a>
+          GET <a class="px-5 link-opacity-50-hover" href="http://127.0.0.1:8000/comments?postId=1" target="_blank">/comments?postId=1</a>
         </li>
 
         <!-- POST Routes -->
         <li class="list-group-item">
-          POST <a class="px-4 mx-2" href="" target="_blank">/users</a>
+          POST <p class="px-4 mx-2 my-0 d-inline-block">/posts?userId=1</p>
         </li>
         <li class="list-group-item">
-          POST <a class="px-4 mx-2" href="" target="_blank">/posts?userId=1</a>
-        </li>
-        <li class="list-group-item">
-          POST <a class="px-4 mx-2" href="" target="_blank">/comments?postId=1</a>
+          POST <p class="px-4 mx-2 my-0 d-inline-block">/comments?postId=1</p>
         </li>
 
         <!-- PUT Routes -->
         <li class="list-group-item">
-          PUT <a class="px-5" href="" target="_blank">/posts?userId=1</a>
+          PUT <p class="px-5 my-0 d-inline-block">/posts</p>
         </li>
-        <li class="list-group-item">
-          PUT <a class="px-5" href="" target="_blank">/comments?postId=1</a>
-        </li>
-        
         
         <!-- PATCH Routes -->
         <li class="list-group-item">
-          PATCH <a class="px-4 mx-2" href="" target="_blank">/posts/1</a>
+          PATCH <p class="px-4 mx-2 my-0 d-inline-block">/posts/1</p>
         </li>
-        <li class="list-group-item">
-          PATCH <a class="px-4 mx-2" href="" target="_blank">/users/1</a>
-        </li>
-        <li class="list-group-item">
-          PATCH <a class="px-4 mx-2" href="" target="_blank">/comments/1</a>
-        </li>
-        
         
         <!-- DELETE Routes -->
         <li class="list-group-item">
-          DELETE <a class="px-4 mx-2" href="" target="_blank">/posts/1</a>
-        </li>
-        <li class="list-group-item">
-          DELETE <a class="px-4 mx-2" href="" target="_blank">/users/1</a>
-        </li>
-        <li class="list-group-item">
-          DELETE <a class="px-4 mx-2" href="" target="_blank">/comments/1</a>
+          DELETE <p class="px-4 mx-2 my-0 d-inline-block">/posts/1</p>
         </li>
         
       </ul>
@@ -161,4 +141,4 @@
 <!-- *Routes End* -->
  
 </main>
-<!-- Main End -->
+<!-- *Main End* -->

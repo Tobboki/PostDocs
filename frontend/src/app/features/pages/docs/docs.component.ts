@@ -50,10 +50,6 @@ export class DocsComponent implements OnInit, AfterViewInit {
       name: 'Filtering resources',
       sectionId: 'filtering-resources'
     },
-    {
-      name: 'Listing nested resources',
-      sectionId: 'listing-nested-resources'
-    }
   ];
 
   codeExamples : CodeExample[] = [
@@ -62,7 +58,7 @@ export class DocsComponent implements OnInit, AfterViewInit {
       title: 'Getting a resource',
       code: `
 // This will return all the posts that belong to the first user
-fetch('https://localhost:8000/posts/1')
+fetch('https://127.0.0.1:8000/posts/1')
   .then((response) => response.json())
   .then((json) => console.log(json));
       `,
@@ -70,8 +66,8 @@ fetch('https://localhost:8000/posts/1')
 {
   id: 1,
   title: '...',
-  body: '...',
-  userId: 1
+  content: '...',
+  user: 1
 }
       `
     },
@@ -79,7 +75,7 @@ fetch('https://localhost:8000/posts/1')
       id: 'listing-all-resources',
       title: 'Listing all resources',
       code: `
-fetch('https://localhost:8000/posts')
+fetch('https://127.0.0.1:8000/posts')
   .then((response) => response.json())
   .then((json) => console.log(json));
       `,
@@ -97,12 +93,12 @@ fetch('https://localhost:8000/posts')
       id: 'creating-a-resource',
       title: 'Creating a resource',
       code: `
-fetch('https://localhost:8000/posts', {
+fetch('https://127.0.0.1:8000/posts', {
   method: 'POST',
-  body: JSON.stringify({
+  content: JSON.stringify({
     title: 'foo',
-    body: 'bar',
-    userId: 1,
+    content: 'bar',
+    user: 1,
   }),
   headers: {
     'Content-type': 'application/json; charset=UTF-8',
@@ -115,8 +111,8 @@ fetch('https://localhost:8000/posts', {
 {
   id: 101,
   title: 'foo',
-  body: 'bar',
-  userId: 1
+  content: 'bar',
+  user: 1
 }
       `
     },
@@ -124,13 +120,13 @@ fetch('https://localhost:8000/posts', {
       id: 'updating-a-resource',
       title: 'Updating a resource',
       code: `
-fetch('https://localhost:8000/posts/1', {
+fetch('https://127.0.0.1:8000/posts/1', {
   method: 'PUT',
-  body: JSON.stringify({
+  content: JSON.stringify({
     id: 1,
     title: 'foo',
-    body: 'bar',
-    userId: 1,
+    content: 'bar',
+    user: 1,
   }),
   headers: {
     'Content-type': 'application/json; charset=UTF-8',
@@ -143,8 +139,8 @@ fetch('https://localhost:8000/posts/1', {
 {
   id: 1,
   title: 'foo',
-  body: 'bar',
-  userId: 1
+  content: 'bar',
+  user: 1
 }
       `
     },
@@ -152,9 +148,9 @@ fetch('https://localhost:8000/posts/1', {
       id: 'patching-a-resource',
       title: 'Patching a resource',
       code: `
-fetch('https://localhost:8000/posts/1', {
+fetch('https://127.0.0.1:8000/posts/1', {
   method: 'PATCH',
-  body: JSON.stringify({
+  content: JSON.stringify({
     title: 'foo',
   }),
   headers: {
@@ -168,8 +164,8 @@ fetch('https://localhost:8000/posts/1', {
 {
   id: 1,
   title: 'foo',
-  body: '...',
-  userId: 1
+  content: '...',
+  user: 1
 }
       `
     },
@@ -177,7 +173,7 @@ fetch('https://localhost:8000/posts/1', {
       id: 'deleting-a-resource',
       title: 'Deleting a resource',
       code: `
-fetch('https://localhost:8000/posts/1', {
+fetch('https://127.0.0.1:8000/posts/1', {
   method: 'DELETE',
 });
       `,
@@ -188,18 +184,7 @@ fetch('https://localhost:8000/posts/1', {
       title: 'Filtering resources',
       code: `
 // This will return all the posts that belong to the first user
-fetch('https://localhost:8000/posts?userId=1')
-  .then((response) => response.json())
-  .then((json) => console.log(json));
-      `,
-      output:``
-    },
-    {
-      id: 'listing-nested-resources',
-      title: 'Listing nested resources',
-      code: `
-// This is equivalent to /comments?postId=1
-fetch('https://localhost:8000/posts/1/comments')
+fetch('https://127.0.0.1:8000/posts?user=1')
   .then((response) => response.json())
   .then((json) => console.log(json));
       `,
