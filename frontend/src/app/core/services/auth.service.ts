@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environments';
 
@@ -8,6 +8,9 @@ import { environment } from '../../../environments/environments';
   providedIn: 'root',
 })
 export class AuthService {
+  private authApiUrl = environment.authApiUrl;
+  private authEndpoints = environment.authEndpoints;
+
   private isLoggedInSignal = signal<boolean>(false);
 
   constructor(private http: HttpClient) {}
@@ -20,7 +23,7 @@ export class AuthService {
   // Register a new user
   register(credentials: { username: string; email: string; password: string }): Observable<boolean> {
     return this.http.post<any>(
-      `${environment.authApiUrl}${environment.authEndpoints.register}`,
+      `${this.authApiUrl}${this.authEndpoints.register}`,
       credentials
     ).pipe(
       map((response) => {
@@ -39,7 +42,7 @@ export class AuthService {
   // Login user
   login(credentials: { username: string; password: string }): Observable<boolean> {
     return this.http.post<any>(
-      `${environment.authApiUrl}${environment.authEndpoints.login}`,
+      `${this.authApiUrl}${this.authEndpoints.login}`,
       credentials,
       { withCredentials: true }
     ).pipe(
@@ -54,7 +57,7 @@ export class AuthService {
   logout(): Observable<boolean> {
     return this.http
       .post<any>(
-        `${environment.authApiUrl}${environment.authEndpoints.logout}`,
+        `${this.authApiUrl}${this.authEndpoints.logout}`,
         {},
         { withCredentials: true }
       )
@@ -83,7 +86,7 @@ export class AuthService {
   // Refresh token
   refreshToken(): Observable<boolean> {
     return this.http.post<any>(
-      `${environment.authApiUrl}${environment.authEndpoints.refreshToken}`,
+      `${this.authApiUrl}${this.authEndpoints.refreshToken}`,
       {},
       { withCredentials: true }
     ).pipe(
@@ -100,7 +103,7 @@ export class AuthService {
   // Check if user is authenticated
   isAuthenticated(): Observable<boolean> {
     return this.http.post<any>(
-      `${environment.authApiUrl}${environment.authEndpoints.isAuthenticated}`,
+      `${this.authApiUrl}${this.authEndpoints.isAuthenticated}`,
       {},
       { withCredentials: true }
     ).pipe(

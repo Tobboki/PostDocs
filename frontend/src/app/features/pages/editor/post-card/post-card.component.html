@@ -1,0 +1,101 @@
+<div class="card rounded-4 mb-4 p-3 pt-2 gap-3">
+
+    <div class="card-header bg-transparent p-2 border-0 d-flex justify-content-between">
+      <app-user-card
+      [user]="postUser"
+      ></app-user-card>
+
+      <div class="btn-group">
+        <button 
+        class="btn rounded-3 px-2 p-0" 
+        type="button" 
+        data-bs-toggle="dropdown" 
+        data-bs-display="static"
+        aria-expanded="false"
+        >
+        <i class="fa-solid fa-ellipsis"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+          <li class="dropdown-item">
+            <button 
+              (click)="editPost(post.id)"
+              class="btn btn-primary w-100 fw-semibold" 
+              >Edit</button>
+            </li>
+            
+            <li class="dropdown-item">
+              <button 
+              (click)="deletePost(post.id)"
+              class="btn btn-danger w-100 fw-semibold" 
+              >Delete</button>
+            </li>
+    
+          </ul>
+      </div>
+    </div>
+
+    <div class="card-body bg-body-secondary p-3 rounded-4">
+      <h5 class="card-title">
+        {{ post.title }}
+      </h5> 
+      <p class="card-text">
+        {{ post.content }}
+      </p>
+    </div> 
+
+    <!-- Divider -->
+     <div class="border-bottom mt-3"></div>
+
+    <!-- Create User Form -->
+    <div class="card my-3 p-3 rounded-4">
+      <form 
+        class="form"
+        [formGroup]="createCommentForm"
+        (ngSubmit)="createComment(post.id)"
+      >
+        <div class="row">
+          <div class="mb-3 col-xl-9 col-md-8 text-md-start text-center">
+            <textarea 
+              class="form-control bg-body-secondary fw-semibold"
+              rows="1" 
+              formControlName="content"
+              placeholder="Write A comment"
+              required
+            ></textarea>
+          </div>
+
+          <div class="mb-3 col-xl-3 col-md-4">
+              <select 
+                class="form-select fw-semibold"
+                formControlName="user"
+                required
+              >
+                <option selected disabled class="text-center fw-semibold">Select A User</option>
+                @for (user of users; track user.id) {
+                  <option value="{{user.id}}" class="fw-semibold text-center">
+                    {{user.firstname}} {{user.lastname}}
+                  </option>
+                }
+              </select>
+            </div>
+        </div>
+
+        <input
+          class="btn btn-primary fw-semibold px-4" 
+          type="submit"
+          value="Comment"
+          [disabled]="createCommentForm.invalid"
+        >
+      </form>
+    </div>
+
+    @for (comment of postComments; track comment.id) {
+      @if (comment) {
+        <div class="mb-3">
+          <app-comment-card
+            [comment]="comment"
+          ></app-comment-card>
+        </div>
+      }
+    }
+  </div>

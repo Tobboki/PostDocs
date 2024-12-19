@@ -4,7 +4,6 @@ import { HomeComponent } from './features/pages/home/home.component';
 import { GuideComponent } from './features/pages/guide/guide.component';
 import { DocsComponent } from './features/pages/docs/docs.component';
 import { NotFoundComponent } from './features/pages/not-found/not-found.component';
-import { PostsComponent } from './features/pages/posts/posts.component';
 import { loginGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
@@ -12,9 +11,9 @@ const routes: Routes = [
   { path: 'guide', component: GuideComponent, title: 'PostDocs | Guide' },
   { path: 'docs', component: DocsComponent, title: 'PostDocs | Docs' },
   { 
-    path: 'posts',
-    component: PostsComponent,
-    title: 'PostPosts | Posts',
+    path: 'editor',
+    loadChildren: () => import('./features/pages/editor/editor.module').then(m => m.EditorModule),
+    title: 'PostDocs | Editor',
     canActivate: [loginGuard]
   },
   { 

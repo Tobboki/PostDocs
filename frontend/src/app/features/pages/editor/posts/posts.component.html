@@ -1,0 +1,67 @@
+<!-- *Posts Component* -->
+<section class="container mt-4 bg-transparent text-body">
+
+  <section class="container col-lg-10">
+
+    <!-- Create Post Form -->
+    <div class="card my-3 p-3 rounded-4">
+      <h5 class=" text-center">Create A Post</h5>
+      <form 
+        class="form"
+        [formGroup]="createPostForm"
+        (ngSubmit)="createPost()"
+      >
+        <div class="row">
+          <div class="col-md-8 mb-2">
+            <input 
+              class="form-control bg-body-secondary fw-semibold" 
+              type="text" 
+              formControlName="title"
+              placeholder="Post Title"
+              required
+            >
+          </div>
+          <div class="col-md-4 mb-2">
+            <select 
+              class="form-select fw-semibold"
+              formControlName="user"
+              required
+            >
+              <option selected disabled class="text-center fw-semibold">Select A User</option>
+              @for (user of users; track user.id) {
+                <option value="{{user.id}}" class="fw-semibold text-center">
+                  {{user.firstname}} {{user.lastname}}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
+        <textarea 
+          class="form-control bg-body-secondary fw-semibold mb-3"
+          rows="3" 
+          formControlName="content"
+          placeholder="Post Content"
+          required
+        ></textarea>
+        <input
+          class="btn btn-primary fw-semibold px-4" 
+          type="submit"
+          value="Post"
+          [disabled]="createPostForm.invalid"
+        >
+    </form>
+    </div>
+
+    <!-- Post Cards -->
+     @for (post of posts; track post.id) {
+      <div>
+        <app-post-card
+          [post]="post"
+        >  </app-post-card>
+      </div>
+     }
+
+  </section>
+
+</section>
+<!-- *Posts Component End* -->

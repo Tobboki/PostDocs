@@ -1,0 +1,33 @@
+<!-- *Editor Component* -->
+<section class="container mt-5 pt-2 text-body">
+
+  <!-- *Header* -->
+  <header class="align-content-center">
+    <ul class="nav nav-pills justify-content-center border-2 border-bottom gap-2 p-2">
+      <li class="nav-item">
+        <a 
+          class="nav-link fw-semibold"
+          [routerLink]="['/editor/posts']"
+          routerLinkActive="active"
+        > Posts </a>
+      </li>
+      <li class="nav-item">
+        <a 
+          class="nav-link fw-semibold"
+          [routerLink]="['/editor/users']"
+          routerLinkActive="active"
+        > Users </a>
+      </li>
+      <li class="nav-item">
+        <a 
+          class="nav-link fw-semibold"
+          [routerLink]="['/editor/comments']"
+          routerLinkActive="active"
+        > Comments </a>
+      </li>
+    </ul>
+  </header>
+
+  <router-outlet></router-outlet>
+</section>
+<!-- *Editor Component End* -->

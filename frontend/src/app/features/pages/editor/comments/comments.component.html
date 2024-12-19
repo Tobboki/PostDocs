@@ -1,0 +1,14 @@
+<!-- *User Component* -->
+<section class="container mt-4 text-body">
+  <section class="container col-lg-10">
+    <!-- User Cards -->
+  @for (comment of comments; track comment.id) {
+    <div class="mb-3">
+      <app-comment-card
+        [comment]="comment"
+      ></app-comment-card>
+    </div>
+  }
+</section>
+  
+<!-- *User Component End* -->

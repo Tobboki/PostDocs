@@ -63,9 +63,9 @@
           <!-- Posts Link -->
           @if (authService.isLoggedIn) {
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['posts']" routerLinkActive="active">
-                <i class="fa-solid fa-newspaper"></i>
-                Posts
+              <a class="nav-link" [routerLink]="['editor']" routerLinkActive="active">
+                <i class="fa-solid fa-pen"></i>
+                Editor
               </a>
             </li>
           }

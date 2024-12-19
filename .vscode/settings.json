@@ -1,5 +1,8 @@
 {
   "cSpell.words": [
-    "rest_framework_simplejwt"
+    "firstname",
+    "lastname",
+    "rest_framework_simplejwt",
+    "subcribe"
   ]
 }

@@ -1,0 +1,25 @@
+<section class="d-flex flex-row align-items-center gap-3">
+  <div class="img-fluid ">
+    @if (userAvatarUrl && userAvatarUrl != '') {
+      <img 
+        class="rounded-5"
+        [src]="userAvatarUrl" 
+        width="32" 
+        height="32"
+        alt="user avatar"
+      >
+    } @else {
+      <img 
+        class="rounded-5"
+        src="https://xsgames.co/randomusers/avatar.php?g=male" 
+        width="32" 
+        height="32"
+        alt="user avatar"
+      >
+    }
+  </div>
+  
+  <h5 class="card-title mb-0">
+      {{user.firstname}} {{user.lastname}}
+  </h5>
+</section>
