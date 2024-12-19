@@ -62,6 +62,16 @@
               placeholder="Write A comment"
               required
             ></textarea>
+            <!-- Content error massages -->
+          @if (createCommentForm.get('content')?.touched && createCommentForm.get('content')?.invalid) {
+            <!-- Content length -->
+            @if (createCommentForm.get('content')?.hasError('minlength') || createCommentForm.get('content')?.hasError('maxlength')) {
+              <div class="d-block">
+                <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                <small class="text-danger">Content must be between 3 and 255 characters.</small>
+              </div>
+            }
+          }
           </div>
 
           <div class="mb-3 col-xl-3 col-md-4">

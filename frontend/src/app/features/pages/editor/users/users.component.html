@@ -12,32 +12,101 @@
           <div class="col-xl-4 col-md-6 mb-2">
             <input 
               class="form-control bg-body-secondary fw-semibold text-md-start text-center" 
+              [class.border-danger]="
+                createUserForm.get('firstname')?.invalid 
+                && (createUserForm.get('firstname')?.dirty || createUserForm.get('firstname')?.touched)
+              "
               type="text" 
               formControlName="firstname"
               placeholder="User's First Name"
               required
             >
+            <!-- Firstname error massages -->
+            @if (createUserForm.get('firstname')?.touched && createUserForm.get('firstname')?.invalid) {
+
+              <!-- Firstname required -->
+              @if (createUserForm.get('firstname')?.hasError('required')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Firstname is required.</small>
+                </div>
+              }
+
+              <!-- Firstname length -->
+              @if (createUserForm.get('firstname')?.hasError('minlength') || createUserForm.get('firstname')?.hasError('maxlength')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Firstname must be between 3 and 18 characters.</small>
+                </div>
+              }
+            }
           </div>
           <div class="col-xl-4 col-md-6 mb-2">
             <input 
               class="form-control bg-body-secondary fw-semibold text-md-start text-center" 
+              [class.border-danger]="
+                createUserForm.get('lastname')?.invalid 
+                && (createUserForm.get('lastname')?.dirty || createUserForm.get('lastname')?.touched)
+              "
               type="text" 
               formControlName="lastname"
               placeholder="User's Last Name"
               required
             >
+            <!-- Lastname error massages -->
+            @if (createUserForm.get('lastname')?.touched && createUserForm.get('lastname')?.invalid) {
+
+              <!-- Lastname required -->
+              @if (createUserForm.get('lastname')?.hasError('required')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Lastname is required.</small>
+                </div>
+              }
+
+              <!-- Lastname length -->
+              @if (createUserForm.get('lastname')?.hasError('minlength') || createUserForm.get('lastname')?.hasError('maxlength')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Lastname must be between 3 and 18 characters.</small>
+                </div>
+              }
+            }
           </div>
         </div>
 
         <div class="row justify-content-center mb-4">
           <div class="col-xl-8">
             <input 
-              class="form-control mb-2 bg-body-secondary fw-semibold text-md-start text-center" 
+              class="form-control mb-2 bg-body-secondary fw-semibold text-md-start text-center"
+              [class.border-danger]="
+                createUserForm.get('email')?.invalid 
+                && (createUserForm.get('email')?.dirty || createUserForm.get('email')?.touched)
+              " 
               type="email" 
               formControlName="email"
               placeholder="User's Email"
               required
             >
+            <!-- Email error massages -->
+            @if (createUserForm.get('email')?.touched && createUserForm.get('email')?.invalid) {
+
+              <!-- Email required -->
+              @if (createUserForm.get('email')?.hasError('required')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Email is required.</small>
+                </div>
+              }
+
+              <!-- Email length -->
+              @if (createUserForm.get('email')?.hasError('email') || createUserForm.get('email')?.hasError('email')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">invalid email.</small>
+                </div>
+              }
+            }
           </div>
         </div>
 

@@ -15,15 +15,43 @@
           <div class="col-md-8 mb-2">
             <input 
               class="form-control bg-body-secondary fw-semibold" 
+              [class.border-danger]="
+                createPostForm.get('title')?.invalid 
+                && (createPostForm.get('title')?.dirty || createPostForm.get('title')?.touched)
+              "
               type="text" 
               formControlName="title"
               placeholder="Post Title"
               required
             >
+
+            <!-- Title error massages -->
+            @if (createPostForm.get('title')?.touched && createPostForm.get('title')?.invalid) {
+
+              <!-- Title required -->
+              @if (createPostForm.get('title')?.hasError('required')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Title is required.</small>
+                </div>
+              }
+
+              <!-- Title length -->
+              @if (createPostForm.get('title')?.hasError('minlength') || createPostForm.get('title')?.hasError('maxlength')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">Title must be between 3 and 128 characters.</small>
+                </div>
+              }
+            }
           </div>
           <div class="col-md-4 mb-2">
             <select 
               class="form-select fw-semibold"
+              [class.border-danger]="
+                createPostForm.get('user')?.invalid 
+                && (createPostForm.get('user')?.dirty || createPostForm.get('user')?.touched)
+              "
               formControlName="user"
               required
             >
@@ -34,15 +62,52 @@
                 </option>
               }
             </select>
+            <!-- User error massages -->
+            @if (createPostForm.get('user')?.touched && createPostForm.get('user')?.invalid) {
+
+              <!-- User required -->
+              @if (createPostForm.get('user')?.hasError('required')) {
+                <div class="d-block">
+                  <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                  <small class="text-danger">User is required.</small>
+                </div>
+              }
+            }
           </div>
         </div>
-        <textarea 
-          class="form-control bg-body-secondary fw-semibold mb-3"
-          rows="3" 
-          formControlName="content"
-          placeholder="Post Content"
-          required
-        ></textarea>
+        <div>
+          <textarea 
+            class="form-control bg-body-secondary fw-semibold mb-3"
+            [class.border-danger]="
+              createPostForm.get('content')?.invalid 
+              && (createPostForm.get('content')?.dirty || createPostForm.get('content')?.touched)
+            "
+            rows="3" 
+            formControlName="content"
+            placeholder="Post Content"
+            required
+          ></textarea>
+
+          <!-- Content error massages -->
+          @if (createPostForm.get('content')?.touched && createPostForm.get('content')?.invalid) {
+
+            <!-- Content required -->
+            @if (createPostForm.get('content')?.hasError('required')) {
+              <div class="d-block">
+                <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                <small class="text-danger">Content is required.</small>
+              </div>
+            }
+
+            <!-- Content length -->
+            @if (createPostForm.get('content')?.hasError('minlength') || createPostForm.get('content')?.hasError('maxlength')) {
+              <div class="d-block">
+                <i class="fa-solid fa-circle-exclamation text-danger me-1"></i>
+                <small class="text-danger">Content must be between 3 and 255 characters.</small>
+              </div>
+            }
+          }
+        </div>
         <input
           class="btn btn-primary fw-semibold px-4" 
           type="submit"
