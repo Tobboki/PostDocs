@@ -82,6 +82,7 @@ export class PostCardComponent implements OnInit{
     this.apiService.createComment(commentData).subscribe({
       next: (response) => {
         console.log('Comment created successfully:', response);
+        window.location.reload();
       },
       error: (err) => {
         console.error('Error occurred while creating comment:', err);
@@ -97,6 +98,7 @@ export class PostCardComponent implements OnInit{
     this.apiService.updatePost(id, postUpdatedData).subscribe({
       next: (response) => {
         console.log('Post updated successfully:', response);
+        window.location.reload();
       },
       error: (err) => {
         console.error('Error occurred while updating post:', err);
@@ -111,6 +113,7 @@ export class PostCardComponent implements OnInit{
     this.apiService.deletePost(id).subscribe({
       next: (response) => {
         console.log('Post deleted successfully:', response);
+        window.location.reload();
       },
       error: (err) => {
         console.error('Error occurred while deleting post:', err);
