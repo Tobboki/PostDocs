@@ -52,6 +52,7 @@ export class PostsComponent implements OnInit{
     this.apiService.createPost(postData).subscribe({
       next: (response) => {
         console.log('Post created successfully:', response);
+        window.location.reload();
       },
       error: (err) => {
         console.error('Error occurred while creating post:', err);

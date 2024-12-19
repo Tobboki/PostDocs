@@ -9,24 +9,6 @@ import { ApiService } from '../../../core/services/api.service';
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.css'
 })
-export class EditorComponent implements OnInit{
-  users: User[] = [];
-  posts: Post[] = [];
-  comments: Comment[] = [];
-
-  constructor(private apiService: ApiService) {}
-
-  ngOnInit(): void {
-    this.apiService.getUsers().subscribe((data) => {
-      this.users = data;
-    });
-
-    this.apiService.getPosts().subscribe((data) => {
-      this.posts = data;
-    });
-
-    this.apiService.getComments().subscribe((data) => {
-      this.comments = data
-    });
-  }
+export class EditorComponent{
+  
 }
