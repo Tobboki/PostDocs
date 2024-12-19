@@ -63,7 +63,6 @@ export class UsersComponent implements OnInit{
     this.apiService.createUser(userData).subscribe({
       next: (response) => {
         console.log('User created successfully:', response);
-        window.location.reload();
       },
       error: (err) => {
         console.error('Error occurred while creating user:', err);
@@ -79,7 +78,6 @@ export class UsersComponent implements OnInit{
     this.apiService.updateUser(id, userUpdatedData).subscribe({
       next: (response) => {
         console.log('User updated successfully:', response);
-        window.location.reload();
       },
       error: (err) => {
         console.error('Error occurred while updating user:', err);
@@ -95,7 +93,6 @@ export class UsersComponent implements OnInit{
     this.apiService.deleteUser(id).subscribe({
       next: (response) => {
         console.log('User deleted successfully:', response);
-        window.location.reload();
       },
       error: (err) => {
         console.error('Error occurred while deleting user:', err);

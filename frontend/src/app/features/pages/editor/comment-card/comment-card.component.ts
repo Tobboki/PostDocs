@@ -58,7 +58,6 @@ export class CommentCardComponent implements OnInit{
     this.apiService.updateComment(id, commentUpdatedData).subscribe({
       next: (response) => {
         console.log('Comment updated successfully:', response);
-        window.location.reload();
       },
       error: (err) => {
         console.error('Error occurred while updating comment:', err);
@@ -73,7 +72,6 @@ export class CommentCardComponent implements OnInit{
     this.apiService.deleteComment(id).subscribe({
       next: (response) => {
         console.log('Comment deleted successfully:', response);
-        window.location.reload();
       },
       error: (err) => {
         console.error('Error occurred while deleting comment:', err);
