@@ -1,9 +1,11 @@
 <div class="card rounded-4 mb-4 p-3 pt-2 gap-3">
 
     <div class="card-header bg-transparent p-2 border-0 d-flex justify-content-between">
-      <app-user-card
-      [user]="postUser"
-      ></app-user-card>
+      @if (postUser) {
+        <app-user-card
+        [user]="postUser"
+        ></app-user-card>
+      }
 
       <div class="btn-group">
         <button 
@@ -82,9 +84,11 @@
               >
                 <option selected disabled class="text-center fw-semibold">Select A User</option>
                 @for (user of users; track user.id) {
-                  <option value="{{user.id}}" class="fw-semibold text-center">
-                    {{user.firstname}} {{user.lastname}}
-                  </option>
+                  @if (user) {
+                    <option value="{{user.id}}" class="fw-semibold text-center">
+                      {{user.firstname}} {{user.lastname}}
+                    </option>
+                  }
                 }
               </select>
             </div>

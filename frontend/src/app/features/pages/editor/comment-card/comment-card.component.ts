@@ -47,15 +47,38 @@ export class CommentCardComponent implements OnInit{
       });
     }
 
-    this.userAvatarUrl = this.avatarService.generateAvatar(this.commentUser.firstname + this.commentUser.lastname);
+    if (this.commentUser) {
+      const username = this.commentUser.firstname.toString() + this.commentUser.lastname.toString()
+      this.userAvatarUrl = this.avatarService.generateAvatar(username);
+    }
   }
 
   editComment(id: number) {
     const commentUpdatedData: Comment = this.editCommentForm.value;
-    this.apiService.updateComment(id, commentUpdatedData);
+    this.apiService.updateComment(id, commentUpdatedData).subscribe({
+      next: (response) => {
+        console.log('Comment updated successfully:', response);
+      },
+      error: (err) => {
+        console.error('Error occurred while updating comment:', err);
+      },
+      complete: () => {
+        console.log('Comment update completed.');
+      }
+    });
   }
   
   deleteComment(id: number) {
-    this.apiService.deleteComment(id);
+    this.apiService.deleteComment(id).subscribe({
+      next: (response) => {
+        console.log('Comment deleted successfully:', response);
+      },
+      error: (err) => {
+        console.error('Error occurred while deleting comment:', err);
+      },
+      complete: () => {
+        console.log('Comment deletion completed.');
+      }
+    });
   }
 }

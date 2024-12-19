@@ -60,19 +60,46 @@ export class UsersComponent implements OnInit{
 
   createUser() {
     const userData: User = this.createUserForm.value;
-    this.apiService.createUser(userData);
+    this.apiService.createUser(userData).subscribe({
+      next: (response) => {
+        console.log('User created successfully:', response);
+      },
+      error: (err) => {
+        console.error('Error occurred while creating user:', err);
+      },
+      complete: () => {
+        console.log('User creation completed.');
+      }
+    });
   }
 
   editUser(id: number) {
     const userUpdatedData: User = this.editUserForm.value;
-    this.apiService.updateUser(id, userUpdatedData);
+    this.apiService.updateUser(id, userUpdatedData).subscribe({
+      next: (response) => {
+        console.log('User updated successfully:', response);
+      },
+      error: (err) => {
+        console.error('Error occurred while updating user:', err);
+      },
+      complete: () => {
+        console.log('User update completed.');
+      }
+    });
 
   }
   
   deleteUser(id: number) {
     this.apiService.deleteUser(id).subscribe({
-      next: () => console.log('User deleted successfully'),
-      error: (err) => console.error('Error deleting user:', err)
+      next: (response) => {
+        console.log('User deleted successfully:', response);
+      },
+      error: (err) => {
+        console.error('Error occurred while deleting user:', err);
+      },
+      complete: () => {
+        console.log('User deletion completed.');
+      }
     });
   }
 

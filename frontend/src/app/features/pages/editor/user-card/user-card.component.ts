@@ -8,12 +8,14 @@ import { AvatarService } from '../../../../core/services/avatar.service';
   styleUrls: ['./user-card.component.css']
 })
 export class UserCardComponent implements OnInit {
-  @Input() user!: User;
+  @Input() user: User | null = null;
   userAvatarUrl: string = '';
 
   constructor(private avatarService: AvatarService) {}
 
   ngOnInit(): void {
-    this.userAvatarUrl = this.avatarService.generateAvatar(this.user.firstname + this.user.lastname);
+    if (this.user) {
+      this.userAvatarUrl = this.avatarService.generateAvatar(this.user.firstname + this.user.lastname);
+    }
   }
 }

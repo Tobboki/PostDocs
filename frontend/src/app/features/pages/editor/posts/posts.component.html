@@ -119,11 +119,13 @@
 
     <!-- Post Cards -->
      @for (post of posts; track post.id) {
-      <div>
-        <app-post-card
-          [post]="post"
-        >  </app-post-card>
-      </div>
+      @if (post) {
+        <div>
+          <app-post-card
+            [post]="post"
+          >  </app-post-card>
+        </div>
+      }
      }
 
   </section>

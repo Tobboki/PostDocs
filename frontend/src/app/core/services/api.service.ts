@@ -34,11 +34,11 @@ export class ApiService {
   }
 
   updatePost(id: number, post: Post): Observable<Post> {
-    return this.http.put<Post>(`${this.baseUrl}${this.endpoints.posts}${id}/`, post);
+    return this.http.put<Post>(`${this.baseUrl}${this.endpoints.posts}${id}`, post);
   }
 
   deletePost(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}${this.endpoints.posts}${id}/`);
+    return this.http.delete(`${this.baseUrl}${this.endpoints.posts}${id}`);
   }
 
   // ----------- USERS -----------
@@ -55,11 +55,11 @@ export class ApiService {
   }
 
   updateUser(id: number, user: User): Observable<User> {
-    return this.http.put<User>(`${this.baseUrl}${this.endpoints.users}${id}/`, user);
+    return this.http.put<User>(`${this.baseUrl}${this.endpoints.users}${id}`, user);
   }
 
   deleteUser(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}${this.endpoints.users}${id}/`);
+    return this.http.delete(`${this.baseUrl}${this.endpoints.users}${id}`);
   }
 
   // ----------- COMMENTS -----------
@@ -80,11 +80,11 @@ export class ApiService {
   }
 
   updateComment(id: number, comment: Comment): Observable<Comment> {
-    return this.http.put<Comment>(`${this.baseUrl}${this.endpoints.comments}${id}/`, comment);
+    return this.http.put<Comment>(`${this.baseUrl}${this.endpoints.comments}${id}`, comment);
   }
 
   deleteComment(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}${this.endpoints.comments}${id}/`);
+    return this.http.delete(`${this.baseUrl}${this.endpoints.comments}${id}`);
   }
 
   // ----------- PHOTOS -----------
@@ -93,7 +93,7 @@ export class ApiService {
   }
 
   getPhotoById(id: number): Observable<Photo> {
-    return this.http.get<Photo>(`${this.baseUrl}${this.endpoints.photos}${id}/`);
+    return this.http.get<Photo>(`${this.baseUrl}${this.endpoints.photos}${id}`);
   }
 
   createPhoto(photo: Photo): Observable<Photo> {
@@ -101,10 +101,10 @@ export class ApiService {
   }
 
   updatePhoto(id: number, photo: Photo): Observable<Photo> {
-    return this.http.put<Photo>(`${this.baseUrl}${this.endpoints.photos}${id}/`, photo);
+    return this.http.put<Photo>(`${this.baseUrl}${this.endpoints.photos}${id}`, photo);
   }
 
   deletePhoto(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}${this.endpoints.photos}${id}/`);
+    return this.http.delete(`${this.baseUrl}${this.endpoints.photos}${id}`);
   }
 }

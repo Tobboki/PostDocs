@@ -46,11 +46,7 @@ export class PostCardComponent implements OnInit{
       content: ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(18),
-      ]],
-      post: ['', [
-        Validators.required,
-        Validators.min(1),
+        Validators.maxLength(255),
       ]],
       user: ['', [
         Validators.required,
@@ -73,22 +69,56 @@ export class PostCardComponent implements OnInit{
       this.postUser = data;
     });
 
-    this.userAvatarUrl = this.avatarService.generateAvatar(this.postUser.firstname + this.postUser.lastname);
+    if (this.postUser) {
+      const username = this.postUser.firstname.toString() + this.postUser.lastname.toString()
+      this.userAvatarUrl = this.avatarService.generateAvatar(username);
+    }
+
   }
 
   createComment(post: number) {
     const {content , user} = this.createCommentForm.value;
     const commentData = {content, post, user};
-    this.apiService.createComment(commentData);
+    this.apiService.createComment(commentData).subscribe({
+      next: (response) => {
+        console.log('Comment created successfully:', response);
+      },
+      error: (err) => {
+        console.error('Error occurred while creating comment:', err);
+      },
+      complete: () => {
+        console.log('Comment creation completed.');
+      }
+    });
   }
 
   editPost(id: number) {
     const postUpdatedData = this.editPostForm.value;
-    this.apiService.updatePost(id, postUpdatedData);
+    this.apiService.updatePost(id, postUpdatedData).subscribe({
+      next: (response) => {
+        console.log('Post updated successfully:', response);
+      },
+      error: (err) => {
+        console.error('Error occurred while updating post:', err);
+      },
+      complete: () => {
+        console.log('Post update completed.');
+      }
+    });
   }
 
   deletePost(id: number) {
-    this.apiService.deletePost(id);
+    this.apiService.deletePost(id).subscribe({
+      next: (response) => {
+        console.log('Post deleted successfully:', response);
+      },
+      error: (err) => {
+        console.error('Error occurred while deleting post:', err);
+      },
+      complete: () => {
+        console.log('Post deletion completed.');
+      }
+    });
   }
 
 }
