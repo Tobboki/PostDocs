@@ -1,8 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../../../core/interfaces/user.interface';
-import { Post } from '../../../core/interfaces/post.interface';
-import { Comment } from '../../../core/interfaces/comment.interface';
-import { ApiService } from '../../../core/services/api.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-editor',
